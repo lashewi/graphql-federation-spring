@@ -1,0 +1,19 @@
+schema {
+    query: Query
+}
+
+#root
+type Query {
+    reviews: [Review]
+}
+
+type Review {
+    id: ID!,
+    body: String,
+    author: String,
+    product: Product
+}
+
+type Product {
+    id: ID!,
+}

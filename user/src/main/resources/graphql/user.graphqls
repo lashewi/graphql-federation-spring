@@ -1,0 +1,14 @@
+schema {
+    query: Query
+}
+
+#root
+type Query {
+    users: [User]
+}
+
+type User {
+    userId: ID!,
+    firstName: String,
+    lastName: String,
+}

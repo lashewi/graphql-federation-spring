@@ -1,0 +1,15 @@
+schema {
+    query: Query
+}
+
+#root
+type Query {
+    products: [Product]
+    prodById(id: ID!): Product
+}
+
+type Product {
+    id: ID!,
+    name: String,
+    price: Int,
+}
