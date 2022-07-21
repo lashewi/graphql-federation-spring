@@ -23,7 +23,7 @@ public class FederatedSchema {
                         .stream()
                         .map(values -> {
                             if ("Product".equals(values.get("__typename"))) {
-                                final Long id = (Long) values.get("id");
+                                final Long id =  Long.valueOf((String) values.get("id"));
                                 if (id instanceof Long) {
                                     return productQueries.lookupProduct(id);
                                 }

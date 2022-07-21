@@ -14,7 +14,7 @@ public class ReviewReferenceResolver {
             return null;
         }
 
-        final Long id = (Long) reference.get(federatedKeyName);
+        final Long id = Long.valueOf((String) reference.get(federatedKeyName));
 
         Review review = new Review();
         review.setId(id);

@@ -14,6 +14,8 @@ type Review {
     product: Product
 }
 
-type Product {
-    id: ID!,
+type Product @key(fields: "id") @extends {
+    id: ID! @external
+    name: String
+    reviews: [Review]
 }
