@@ -1,0 +1,7 @@
+query prodById($id: ID!){
+    prodById(id: $id){
+        id
+        name
+        price
+    }
+}
