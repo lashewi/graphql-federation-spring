@@ -5,7 +5,6 @@ schema {
 #root
 type Query {
     users: [User]
-    me: User
 }
 
 type User {
