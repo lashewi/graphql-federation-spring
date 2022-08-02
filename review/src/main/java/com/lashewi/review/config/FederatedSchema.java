@@ -1,9 +1,10 @@
 package com.lashewi.review.config;
 
-import com.apollographql.federation.graphqljava.SchemaTransformer;
+import com.apollographql.federation.graphqljava.Federation;
 import com.apollographql.federation.graphqljava._Entity;
+import com.lashewi.review.impl.ReviewQueries;
 import com.lashewi.review.model.Review;
-import com.lashewi.review.resolver.ReviewReferenceResolver;
+import graphql.kickstart.tools.SchemaParser;
 import graphql.schema.GraphQLSchema;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -16,15 +17,16 @@ import java.util.stream.Collectors;
 public class FederatedSchema {
 
     @Bean
-    public GraphQLSchema federatedGraphQLSchema(SchemaTransformer schemaTransformer) {
-
-        String federationTypeName = "Review";
-
-        return schemaTransformer.fetchEntities(env -> env.<List<Map<String, Object>>>getArgument(_Entity.argumentName)
+    public GraphQLSchema customSchema(SchemaParser schemaParser, ReviewQueries reviewQueries){
+        return Federation.transform(schemaParser.makeExecutableSchema())
+                .fetchEntities(env -> env.<List<Map<String, Object>>>getArgument(_Entity.argumentName)
                         .stream()
-                        .map(reference -> {
-                            if (federationTypeName.equals(reference.get("__typename"))) {
-                                return ReviewReferenceResolver.resolveReference(reference);
+                        .map(values -> {
+                            if ("Review".equals(values.get("__typename"))) {
+                                final Long id =  Long.valueOf((String) values.get("id"));
+                                if (id instanceof Long) {
+                                    return reviewQueries.lookupReview(id);
+                                }
                             }
                             return null;
                         })
@@ -32,8 +34,7 @@ public class FederatedSchema {
                 .resolveEntityType(env -> {
                     final Object src = env.getObject();
                     if (src instanceof Review) {
-                        return env.getSchema()
-                                .getObjectType(federationTypeName);
+                        return env.getSchema().getObjectType("Review");
                     }
                     return null;
                 })

@@ -22,6 +22,7 @@ public class FederatedSchema {
                 .fetchEntities(env -> env.<List<Map<String, Object>>>getArgument(_Entity.argumentName)
                         .stream()
                         .map(values -> {
+                            System.out.println("TEST 0" + values.get("__typename"));
                             if ("Product".equals(values.get("__typename"))) {
                                 final Long id =  Long.valueOf((String) values.get("id"));
                                 if (id instanceof Long) {

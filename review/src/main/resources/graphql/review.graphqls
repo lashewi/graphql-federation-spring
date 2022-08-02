@@ -7,7 +7,7 @@ type Query {
     reviews: [Review]
 }
 
-type Review {
+type Review @key(fields: "id") {
     id: ID!,
     body: String,
     author: String,
@@ -16,6 +16,5 @@ type Review {
 
 type Product @key(fields: "id") @extends {
     id: ID! @external
-    name: String
     reviews: [Review]
 }

@@ -29,11 +29,4 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "CONTACT_ID")
-//    private Contact contact;
-//
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<Activity> activities;
-
 }

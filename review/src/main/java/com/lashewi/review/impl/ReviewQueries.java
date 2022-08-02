@@ -7,6 +7,7 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,11 @@ public class ReviewQueries implements GraphQLQueryResolver {
     public List<Review> reviews() {
         log.info("Loading reviews");
         return reviewRepository.findAll();
+    }
+
+    public Review lookupReview(@NotNull Long id) {
+        log.info("lookupReview with ID: {}", id);
+        return reviewRepository.findById(id).get();
     }
 
 }

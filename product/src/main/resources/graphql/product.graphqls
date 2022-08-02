@@ -12,4 +12,10 @@ type Product @key(fields: "id") {
     id: ID!,
     name: String,
     price: Int,
+    reviews: [Review]
+}
+
+type Review @key(fields: "id") @extends {
+    id: ID! @external
+    product: Product
 }

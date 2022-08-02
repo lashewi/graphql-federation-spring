@@ -1,4 +1,4 @@
-package com.lashewi.user.model;
+package com.lashewi.product.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,24 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PRODUCT")
-public class Product {
+@Table(name = "REVIEW")
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "NAME")
-    private String name;
-
-    @Column(name = "PRICE")
-    private Integer price;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 }

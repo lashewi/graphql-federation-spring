@@ -31,7 +31,7 @@ public class ProductQueries implements GraphQLQueryResolver {
     }
 
     public Product lookupProduct(@NotNull Long id) {
-        log.info("lookupProduct product with ID: {}", id);
+        log.info("lookupProduct with ID: {}", id);
         return productRepository.findById(id).get();
     }
 

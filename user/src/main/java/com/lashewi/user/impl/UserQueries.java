@@ -14,8 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserQueries implements GraphQLQueryResolver {
 
-    private static final String URL = "http://localhost:4000/graphql";
-
     @NonNull
     private final UserRepository userRepository;
 
